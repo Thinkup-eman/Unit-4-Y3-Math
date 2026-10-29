@@ -131,7 +131,7 @@ function spinnerSVG(secs,rot){const n=secs.length,a=360/n;let p='';secs.forEach(
 function partWords(done){
   const T=(t,a,w)=>({prompt:t[0],visual:t[1],opts:CH,keep:true,ans:a,why:w});
   runMC([
-    T(['<b>The sun will rise tomorrow.</b> How likely is this?',null],'Certain','It happens every day, so it is certain.'),
+    T(['Today is Tuesday. <b>Tomorrow will be Wednesday.</b> How likely is this?',null],'Certain','Wednesday always comes after Tuesday, so it is certain.'),
     T(['You roll a normal dice (numbered 1 to 6). <b>You roll a 7.</b>',null],'Impossible','A normal dice has no 7, so it can never happen.'),
     T(['<b>You pick a red marble</b> without looking.',bag({red:9,blue:1})],'Likely','Most of the marbles are red, so red is likely. It is not certain because 1 marble is blue.'),
     T(['<b>You pick a blue marble</b> without looking.',bag({red:9,blue:1})],'Unlikely','Only 1 out of 10 marbles is blue, so blue is unlikely.'),

@@ -133,12 +133,12 @@ function partBuildBar(done){
 function partBuildPicto(done){
   const target=[{l:'Apples',v:3},{l:'Pears',v:2},{l:'Bananas',v:5}];const mine=target.map(()=>0);let wrong=false;const msg=h('div',{class:'msg'});
   const tb=h('table',{class:'t'},h('tr',{},h('th',{},'Fruit'),h('th',{},'Number of children')),target.map(d=>h('tr',{},h('td',{class:'l'},d.l),h('td',{},d.v*2))));
-  const t=h('table',{class:'t'});const cells=target.map((d,i)=>{const c=h('td',{style:'text-align:left;min-height:44px'});const upd=()=>c.replaceChildren(pictoRow('🍎',mine[i]));upd();
+  const t=h('table',{class:'t'});const cells=target.map((d,i)=>{const c=h('td',{style:'text-align:left;min-height:44px'});const upd=()=>c.replaceChildren(pictoRow('⭐',mine[i]));upd();
     t.append(h('tr',{},h('td',{class:'l',style:'width:30%'},d.l),c,h('td',{style:'width:92px'},h('button',{class:'btn ghost',style:'padding:4px 10px;min-height:40px','aria-label':'add a picture to '+d.l,onclick:()=>{if(mine[i]<8){mine[i]++;upd();msg.textContent='';}}},'+'),' ',h('button',{class:'btn ghost',style:'padding:4px 10px;min-height:40px','aria-label':'take a picture from '+d.l,onclick:()=>{if(mine[i]>0){mine[i]--;upd();msg.textContent='';}}},'−'))));return c;});
   const next=h('button',{class:'btn gold',hidden:'',onclick:done},'Next part');
-  const chk=h('button',{class:'btn',onclick:()=>{const bad=target.filter((d,i)=>mine[i]!==d.v);if(!bad.length){msg.textContent='Great! 6 children = 3 pictures, because each picture is 2.';msg.className='msg good';if(!wrong)S.score++;chk.hidden=true;next.hidden=false;next.focus();}else{wrong=true;msg.textContent='Check: '+bad.map(b=>b.l).join(', ')+'. Remember: each 🍎 means 2 children.';msg.className='msg bad';}}},'Check my pictogram');
+  const chk=h('button',{class:'btn',onclick:()=>{const bad=target.filter((d,i)=>mine[i]!==d.v);if(!bad.length){msg.textContent='Great! 6 children = 3 pictures, because each picture is 2.';msg.className='msg good';if(!wrong)S.score++;chk.hidden=true;next.hidden=false;next.focus();}else{wrong=true;msg.textContent='Check: '+bad.map(b=>b.l).join(', ')+'. Remember: each ⭐ means 2 children.';msg.className='msg bad';}}},'Check my pictogram');
   S.total++;
-  show(head('Pictogram',2,4,'Part 2: Build a pictogram'),h('div',{class:'card'},h('h2',{},'Draw the pictogram from the table.'),h('p',{class:'lead',style:'margin-bottom:8px'},'Key: 🍎 = 2 children. Press + to add a picture.'),h('div',{style:'overflow-x:auto'},tb),h('div',{style:'height:10px'}),t,h('div',{class:'row',style:'margin-top:10px'},chk),msg,h('div',{style:'margin-top:12px'},next)));
+  show(head('Pictogram',2,4,'Part 2: Build a pictogram'),h('div',{class:'card'},h('h2',{},'Draw the pictogram from the table.'),h('p',{class:'lead',style:'margin-bottom:8px'},'Key: ⭐ = 2 children. Press + to add a picture.'),h('div',{style:'overflow-x:auto'},tb),h('div',{style:'height:10px'}),t,h('div',{class:'row',style:'margin-top:10px'},chk),msg,h('div',{style:'margin-top:12px'},next)));
 }
 function partRead(done){
   const data=[{l:'Mon',v:8},{l:'Tue',v:12},{l:'Wed',v:6},{l:'Thu',v:10},{l:'Fri',v:4}];
