@@ -33,7 +33,7 @@ h2{font-size:22px;line-height:1.35;margin:0;font-weight:700}
 .stitle{font-family:var(--disp);font-weight:800;font-size:30px;line-height:1.15;margin:16px 0 4px}
 .lead{color:var(--mute);margin:0 0 14px}
 .card{position:relative;background:var(--card);border:4px solid var(--navy);border-radius:28px;padding:20px 20px 52px;margin-bottom:22px;box-shadow:0 7px 0 var(--navy)}
-.card::after{content:"";position:absolute;right:16px;bottom:12px;width:50px;height:35px;background:var(--brain) center/contain no-repeat;opacity:.22;pointer-events:none}
+.card::after{content:"";position:absolute;right:16px;bottom:12px;width:58px;height:41px;background:var(--brain) center/contain no-repeat;opacity:.45;pointer-events:none}
 .qh{display:flex;gap:14px;align-items:flex-start}
 .qn{flex:none;width:46px;height:46px;border-radius:50%;background:var(--gold);border:4px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:22px;color:var(--navy)}
 .ar{direction:rtl;text-align:right;font-family:'Noto Naskh Arabic','Segoe UI',Tahoma,Arial,sans-serif;background:var(--teal-soft);color:#17706d;border-radius:12px;padding:10px 14px;margin:12px 0;font-size:19px;line-height:1.7}
@@ -110,6 +110,8 @@ table.carroll th{font-size:15px}
 .fab{position:fixed;right:14px;bottom:16px;z-index:30;display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;text-decoration:none;font-family:var(--disp);font-weight:800;font-size:19px;border:4px solid var(--navy);border-radius:22px;padding:8px 18px;box-shadow:0 5px 0 var(--navy)}
 body{padding-bottom:96px}
 
+body::after{content:"";position:fixed;inset:0;background:var(--brain) center 55%/70% no-repeat;opacity:.06;mix-blend-mode:multiply;pointer-events:none;z-index:6}
+
 .mcard{display:block;text-decoration:none;color:var(--navy);border:4px solid var(--navy);border-radius:26px;padding:16px 20px;margin-bottom:20px;box-shadow:0 6px 0 var(--navy);position:relative}
 .mcard .n{position:absolute;left:-6px;top:-10px;width:40px;height:40px;border-radius:50%;background:#fff;border:4px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px}
 .mcard h2{font-size:26px;font-weight:800;margin:4px 0 2px}.mcard p{margin:0 0 8px}
@@ -125,7 +127,7 @@ body{padding-bottom:96px}
 <button class="arbtn" id="arbtn" type="button">إخفاء الشرح بالعربي / Hide Arabic help</button>
 <div class="hprog"><div class="hbar" id="hbar"><i></i></div><div class="hstar" id="hstar">★ 0 / 0</div></div>
 </div></header>
-<div class="wrap"><div class="note">Type your name and play. When you finish a mission, press "Send this result" at the bottom to send it to your teacher. You can also send all your results together.<div class="ar" lang="ar" dir="rtl">اكتبي اسمك والعبي. لما تخلّصي أي لعبة دوسي <bdi dir="ltr" class="en">Send this result</bdi> في آخر الصفحة عشان تبعتي نتيجتها لمس إيمان. وتقدري كمان تبعتي نتيجة كل الألعاب مع بعض.</div></div>
+<div class="wrap"><div class="note">Type your name and play. When you finish a mission, press "Send this result" at the bottom to send it to your teacher. You can also send all your results together.<div class="ar" lang="ar" dir="rtl">اكتب اسمك والعب. عند الانتهاء من أي لعبة اضغط <bdi dir="ltr" class="en">Send this result</bdi> في آخر الصفحة لترسل نتيجتها إلى مس إيمان. ويمكنك أيضًا إرسال نتيجة كل الألعاب معًا.</div></div>
 <div class="pill"><img src="data:image/png;base64,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" alt="ThinkUp"><b>Year 3 · Unit 4</b></div><br>
 <a class="back" href="index.html">← Mission Map</a>
 <div class="stitle">5. Unit 4 Challenge</div><p class="lead">10 mixed questions on Unit 4</p>
@@ -136,7 +138,7 @@ body{padding-bottom:96px}
 <script>
 const $=(s,r=document)=>r.querySelector(s);
 const WA='201026794126';const KEY='thinkup_y3_u4';
-const GAMES=[['sort','Sort It!',39],['tally','Tally Time',13],['charts','Chart Maker',8],['chance','Chance Spinner',12],['quiz','Unit 4 Challenge',10]];
+const GAMES=[['sort','Sort It!',76],['tally','Tally Time',13],['charts','Chart Maker',8],['pictograms','Pictogram Keys',14],['quiz','Unit 4 Challenge',10]];
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{name:'',games:{}};}catch(e){return{name:'',games:{}};}}
 function store(d){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
 function stars(sc,t){const p=t?sc/t:0;return p>=.9?'★★★':p>=.65?'★★☆':'★☆☆';}
@@ -148,13 +150,12 @@ function copyText(t,btn){const ok=()=>{if(btn){const o=btn.textContent;btn.textC
 function waLink(t){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(t);}
 function oneLines(d,k){const nm=(d.name||'').trim()||'Student';const i=GAMES.findIndex(x=>x[0]===k);const [,t,tot]=GAMES[i];const g=d.games[k];
   return ['ThinkUp Year 3 · Unit 4 (Statistical methods and chance)','Name: '+nm,(i+1)+'. '+t+': '+(g?(g.done?g.score+' / '+tot+'  '+stars(g.score,tot):'not finished ('+g.score+' / '+tot+' so far)'):'not played')];}
-function resultCards(){const d=load();const root=$('#results');if(!root)return;const cur=window.GAME&&window.GAME.key;
+function resultCards(){const d=load();const cur=window.GAME&&window.GAME.key;const f=$('#fab');if(f)f.href=waLink(lines(d).join('\n'));const root=$('#results');if(!root)return;if(cur&&!window.__done){root.replaceChildren();return;}
   const mk=(title,txt,arTxt,send,cp)=>h('div',{class:'result'},h('h2',{},title),txt.map(l=>h('p',{},l)),h('div',{class:'ar',lang:'ar',dir:'rtl',html:bidi(arTxt)}),h('div',{class:'row'},h('a',{class:'btn wa',style:'text-decoration:none;display:inline-flex;align-items:center',href:waLink(txt.join('\n')),target:'_blank',rel:'noopener'},send),h('button',{class:'btn',onclick:e=>copyText(txt.join('\n'),e.target)},cp)));
   const kids=[];
-  if(cur)kids.push(mk('My result',oneLines(d,cur),'مش لازم تلعبي كل الألعاب. دوسي على الزرار الأخضر عشان تبعتي نتيجة اللعبة دي لمس إيمان على واتساب. أو دوسي Copy my result عشان تنسخيها.','Send this result to Miss Eman on WhatsApp','Copy my result'));
-  kids.push(mk('All my Unit 4 results',lines(d),'ده تقرير بنتيجة كل الألعاب مرة واحدة. دوسي على الزرار الأخضر عشان تبعتيه لمس إيمان. أو دوسي Copy all my results عشان تنسخيه.','Send all my results to Miss Eman on WhatsApp','Copy all my results'));
-  root.replaceChildren(...kids);
-  const f=$('#fab');if(f)f.href=waLink((cur?oneLines(d,cur):lines(d)).join('\n'));}
+  if(cur)kids.push(mk('My result',oneLines(d,cur),'ليس لازمًا أن تلعب كل الألعاب. اضغط على الزر الأخضر لترسل نتيجة هذه اللعبة إلى مس إيمان على واتساب، أو اضغط Copy my result لنسخها.','Send this result to Miss Eman on WhatsApp','Copy my result'));
+  kids.push(mk('All my Unit 4 results',lines(d),'هذا تقرير بنتيجة كل الألعاب معًا. اضغط على الزر الأخضر لترسله إلى مس إيمان، أو اضغط Copy all my results لنسخه.','Send all my results to Miss Eman on WhatsApp','Copy all my results'));
+  root.replaceChildren(...kids);}
 let lastSig='';
 function tick(){const d=load();const tot=window.GAME?window.GAME.total:0;
   if(window.GAME&&S.total>0){const g=d.games[window.GAME.key]||{};const done=!!g.done&&S.score===g.score;
@@ -163,7 +164,7 @@ function tick(){const d=load();const tot=window.GAME?window.GAME.total:0;
     if(!g.done||window.__done||S.score>g.score){d.games[window.GAME.key]=cur;}
     store(d);}
   const hs=$('#hstar'),hb=$('#hbar i');if(hs&&window.GAME){hs.textContent='★ '+S.score+' / '+tot;if(hb)hb.style.width=Math.round(S.score/tot*100)+'%';}
-  const sig=JSON.stringify(d);if(sig!==lastSig){lastSig=sig;resultCards();}}
+  const sig=JSON.stringify(d)+(window.__done?'D':'');if(sig!==lastSig){lastSig=sig;resultCards();}}
 function initChrome(){const d=load();const inp=$('#pname');if(inp){inp.value=d.name||'';inp.addEventListener('input',()=>{const x=load();x.name=inp.value;store(x);lastSig='';tick();});}
   const b=$('#arbtn');if(b)b.addEventListener('click',()=>{const off=document.body.classList.toggle('noar');b.textContent=off?'إظهار الشرح بالعربي / Show Arabic help':'إخفاء الشرح بالعربي / Hide Arabic help';});
   tick();setInterval(tick,500);}
@@ -210,52 +211,6 @@ function pictoRow(emoji,n,half){const d=h('span',{});for(let i=0;i<n;i++)d.appen
 function pictogram(rows,emoji,key,title){const t=h('table',{class:'t'});if(title)t.append(h('caption',{style:'font-weight:800;padding-bottom:6px'},title));rows.forEach(r=>t.append(h('tr',{},h('td',{class:'l',style:'width:34%'},r.l),h('td',{style:'text-align:left'},pictoRow(emoji,Math.floor(r.v/key),(r.v/key)%1!==0)))));
   return h('div',{},t,h('div',{class:'axis-t'},`Key: ${emoji} = ${key}`+(rows.some(r=>(r.v/key)%1!==0)?`, half a picture = ${key/2}`:'')));}
 
-const CH=['Impossible','Unlikely','Even chance','Likely','Certain'];
-const COL={red:'#d64a3b',blue:'#2f6fcf',yellow:'#e8b81f',green:'#2f9a57'};
-function bag(map,title){const arr=[];Object.entries(map).forEach(([c,n])=>{for(let i=0;i<n;i++)arr.push(c);});const d=h('div',{style:'display:flex;flex-wrap:wrap;gap:6px;max-width:300px;margin:6px auto;padding:12px;border:2.5px solid var(--navy);border-radius:14px 14px 30px 30px;background:var(--gold-soft)'});
-  shuffle(arr).forEach(c=>d.append(h('span',{role:'img','aria-label':c+' marble',style:`width:26px;height:26px;border-radius:50%;background:${COL[c]};border:2px solid rgba(0,0,0,.25);display:inline-block`})));
-  return h('div',{style:'text-align:center'},h('div',{class:'ctitle'},title||'A bag of marbles'),d,h('div',{class:'axis-t'},Object.entries(map).map(([c,n])=>`${n} ${c}`).join(', ')));}
-function spinnerSVG(secs,rot){const n=secs.length,a=360/n;let p='';secs.forEach((c,i)=>{const s=(i*a-90)*Math.PI/180,e=((i+1)*a-90)*Math.PI/180;const x1=100+90*Math.cos(s),y1=100+90*Math.sin(s),x2=100+90*Math.cos(e),y2=100+90*Math.sin(e);const m=((i+.5)*a-90)*Math.PI/180;const tx=(100+60*Math.cos(m)).toFixed(1),ty=(100+60*Math.sin(m)).toFixed(1);
-  p+=`<path d="M100 100 L${x1.toFixed(1)} ${y1.toFixed(1)} A90 90 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="${COL[c]}" stroke="#fff" stroke-width="2"/><text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="12" fill="${c==='yellow'?'#1c2b4a':'#fff'}">${c}</text>`;});
-  return `<svg viewBox="0 0 200 200" width="240" style="max-width:100%;display:block;margin:0 auto" role="img" aria-label="spinner"><g class="wheel" style="transform-origin:100px 100px;transition:transform 2.2s cubic-bezier(.15,.7,.2,1);transform:rotate(${rot||0}deg)">${p}<circle cx="100" cy="100" r="7" fill="#1c2b4a"/></g></svg>`;}
-function partWords(done){
-  const LEG=' (Impossible = مستحيل · Unlikely = مش متوقّع · Even chance = فرصة متساوية · Likely = متوقّع · Certain = أكيد)';
-  const T=(t,a,w,ar)=>({ar:ar+LEG,prompt:t[0],visual:t[1],opts:CH,keep:true,ans:a,why:w});
-  runMC([
-    T(['Today is Tuesday. <b>Tomorrow will be Wednesday.</b> How likely is this?',null],'Certain','Wednesday always comes after Tuesday, so it is certain.','النهارده الثلاثاء. فكري: هل بكرة ممكن يكون يوم تاني غير الأربعاء؟'),
-    T(['You roll a normal dice (numbered 1 to 6). <b>You roll a 7.</b>',null],'Impossible','A normal dice has no 7, so it can never happen.','الزهر العادي عليه الأرقام من 1 لـ 6. فكري: هل ممكن يطلع 7؟'),
-    T(['<b>You pick a red marble</b> without looking.',bag({red:9,blue:1})],'Likely','Most of the marbles are red, so red is likely. It is not certain because 1 marble is blue.','هتسحبي كورة من غير ما تبصي. عدّي الكور في الشنطة وقارني عدد الحمر بباقي الكور.'),
-    T(['<b>You pick a blue marble</b> without looking.',bag({red:9,blue:1})],'Unlikely','Only 1 out of 10 marbles is blue, so blue is unlikely.','عدّي الكور الزرقا في الشنطة وقارنيها بعدد الكور كله.'),
-    T(['<b>You pick a green marble</b> without looking.',bag({red:6})],'Impossible','There are no green marbles in the bag.','بصي في الشنطة: هل فيها كور خضرا؟'),
-    T(['<b>You pick a red marble</b> without looking.',bag({red:6})],'Certain','Every marble is red, so you must pick red.','بصي في الشنطة: كل الكور لونها إيه؟'),
-    T(['<b>You pick a blue marble</b> without looking.',bag({red:5,blue:5})],'Even chance','Half the marbles are red and half are blue, so the chances are equal.','عدّي الكور الحمرا والكور الزرقا في الشنطة وقارني بينهم.')
-  ],'Part 1: How likely?',done);
-}
-function partSpin(done){
-  const secs=['red','red','red','red','red','blue','blue','yellow'];
-  const sp=()=>h('div',{html:spinnerSVG(secs)});
-  runMC([
-    {ar:'«Most likely» = الأكتر احتمالًا: اللون اللي مساحته على العجلة هي الأكبر.',prompt:'Look at the spinner. Which colour is <b>most likely</b>?',visual:sp(),opts:['red','blue','yellow'],ans:'red',keep:true,why:'Red covers 5 of the 8 sections.'},
-    {ar:'«Least likely» = الأقل احتمالًا: اللون اللي مساحته على العجلة هي الأصغر.',prompt:'Which colour is <b>least likely</b>?',visual:sp(),opts:['red','blue','yellow'],ans:'yellow',keep:true,why:'Yellow covers only 1 of the 8 sections.'},
-    {ar:'بصي على العجلة: هل فيها لون أخضر؟ ' +'(Impossible = مستحيل · Unlikely = مش متوقّع · Even chance = فرصة متساوية · Likely = متوقّع · Certain = أكيد)',prompt:'How likely is it that the spinner lands on <b>green</b>?',visual:sp(),opts:CH,keep:true,ans:'Impossible',why:'There is no green section.'}
-  ],'Part 2: The spinner',()=>experiment(done,secs));
-}
-function experiment(done,secs){
-  const counts={red:0,blue:0,yellow:0};let spins=0,rot=0,busy=false;
-  const host=h('div',{html:spinnerSVG(secs)});const pointer=h('div',{style:'text-align:center;font-size:26px;line-height:1;color:var(--navy);margin-bottom:-6px','aria-hidden':'true'},'▼');
-  const tallyBox=h('div',{});const info=h('div',{class:'msg'});
-  const next=h('button',{class:'btn gold',hidden:'',onclick:()=>qEnd()},'I have enough results');
-  const drawT=()=>{tallyBox.replaceChildren(h('table',{class:'t'},h('tr',{},h('th',{},'Colour'),h('th',{},'Tally'),h('th',{},'Total')),Object.keys(counts).map(c=>h('tr',{},h('td',{class:'l'},c),h('td',{style:'text-align:left'},counts[c]?tallySVG(counts[c]):''),h('td',{},counts[c])))));};drawT();
-  const rec=c=>{counts[c]++;spins++;drawT();info.textContent='Spins so far: '+spins+(spins<20?' (spin at least 20)':'');if(spins>=20)next.hidden=false;};
-  const spin1=h('button',{class:'btn',onclick:()=>{if(busy)return;busy=true;const i=Math.floor(Math.random()*secs.length);const a=360/secs.length;rot=(Math.floor(rot/360)+4)*360+((360-(i+.5)*a)%360);$('.wheel',host).style.transform=`rotate(${rot}deg)`;setTimeout(()=>{rec(secs[i]);busy=false;},window.matchMedia('(prefers-reduced-motion:reduce)').matches?0:2250);}},'Spin once');
-  const spin10=h('button',{class:'btn ghost',onclick:()=>{if(busy)return;for(let k=0;k<10;k++)rec(secs[Math.floor(Math.random()*secs.length)]);}},'Spin 10 times fast');
-  function qEnd(){const mx=Math.max(...Object.values(counts));const winners=Object.keys(counts).filter(c=>counts[c]===mx);
-    runMC([{ar:'قارني الأعداد في الجدول: أي لون عدده أكبر؟',prompt:'After '+spins+' spins, which colour came up the <b>most</b>?',visual:h('div',{},tallyBox),opts:['red','blue','yellow'],ans:winners[0],accept:winners,keep:true,why:'Compare the totals in the table.'},
-      {ar:'قارني اللون اللي طلع أكتر بنتيجتك مع اللون اللي كنا قلنا إنه الأكتر احتمالًا (الأحمر).',prompt:'Is this the <b>same</b> as the colour you said was most likely (red)?',visual:null,opts:['Yes, red came up the most','No, but red is still the most likely colour'],ans:counts.red===mx?'Yes, red came up the most':'No, but red is still the most likely colour',keep:true,why:'Chance is never exact. With more spins, red gets closer to coming up most often.'}],'Part 3: Your results',done);}
-  show(head('Experiment',3,3,'Part 3: Experiment'),h('div',{class:'card'},qhead(1,'Spin it! Spin at least 20 times.'),arBox('دوري العجلة بـ «Spin once»، أو دوسي «Spin 10 times fast» لحد ما يبقى عندك 20 لفّة على الأقل. بعد كده دوسي «I have enough results».'),h('p',{class:'lead'},'Does the most likely colour come up the most?'),pointer,host,h('div',{class:'row',style:'justify-content:center;margin:12px 0'},spin1,spin10),info,tallyBox,h('div',{style:'margin-top:12px'},next)));
-}
-function start(){S.score=0;S.total=0;partWords(()=>partSpin(()=>end('Chance Spinner complete')));}
-
 const Q=[];
 function carrollStatic(){return h('table',{class:'t'},h('tr',{},h('th',{}),h('th',{},'Greater than 10'),h('th',{},'Not greater than 10')),h('tr',{},h('td',{class:'l'},'Odd'),h('td',{},'13, 17, 25'),h('td',{},'5, 9')),h('tr',{},h('td',{class:'l'},'Even'),h('td',{},'12, 20'),h('td',{},'4, 6, 8')));}
 const c1=()=>h('div',{style:'overflow-x:auto'},carrollStatic());
@@ -266,16 +221,16 @@ const bc=()=>barChart({data:bd,max:20,step:5,title:'Favourite colour',ylabel:'Nu
 const pr=[{l:'Mon',v:12},{l:'Tue',v:6},{l:'Wed',v:14},{l:'Thu',v:10}];
 const pc=()=>pictogram(pr,'🚌',4,'Buses seen outside school');
 Q.push(
- {ar:'الجدول فيه أرقام زوجية وفردية. الرقم لازم يكون «Odd» (فردي) و«Greater than 10» (أكبر من 10) مع بعض. عدّي الأرقام دي.',prompt:'How many numbers are <b>odd and greater than 10</b>?',visual:c1(),opts:[2,3,4,5],ans:3,keep:true,why:'Odd and greater than 10 is the top left box: 13, 17 and 25. That is 3 numbers.'},
- {ar:'«In all» = الإجمالي: عدّي كل الأرقام اللي في الجدول كله.',prompt:'How many numbers are in the diagram <b>in all</b>?',visual:c1(),opts:[8,9,10,11],ans:10,keep:true,why:'3 + 2 + 2 + 3 = 10.'},
- {ar:'«Fewest» = الأقل: اختاري الأكل اللي ليه أقل عدد علامات.',prompt:'Which food did the <b>fewest</b> children choose?',visual:tt(),opts:['Pizza','Pasta','Rice','Soup'],ans:'Soup',keep:true,why:'Soup has the fewest marks: 4.'},
- {ar:'«In all» = الإجمالي: اجمعي عدد علامات كل أنواع الأكل (كل مجموعة = 5).',prompt:'How many children were asked <b>in all</b>?',visual:tt(),opts:[29,30,31,32],ans:31,keep:true,why:'9 + 6 + 12 + 4 = 31.'},
- {ar:'بصي على عمود Blue واقري الرقم عند أعلاه. الخطوط بتزيد 5، 5.',prompt:'How many children chose <b>Blue</b>?',visual:bc(),opts:[10,12,15,20],ans:15,keep:true,why:'The Blue bar reaches 15. The scale goes up in 5s.'},
- {ar:'«More» = أكتر بكام؟ اقري عمود Pink وعمود Green، وبعدين اطرحي.',prompt:'How many <b>more</b> children chose Pink than Green?',visual:bc(),opts:[5,10,15,25],ans:15,keep:true,why:'Pink = 20, Green = 5. 20 − 5 = 15.'},
- {ar:'كل أتوبيس كامل = 4. نص الأتوبيس = 2. اجمعي أتوبيسات Wednesday.',prompt:'How many buses were seen on <b>Wednesday</b>?',visual:pc(),opts:[3,12,14,16],ans:14,keep:true,why:'3 whole buses = 12, and the half bus = 2. 12 + 2 = 14.'},
- {ar:'فكري كويس. شوفي كام أتوبيس في Monday وكام في Tuesday (فيه نص أتوبيس)، وبعدين اجمعي.',prompt:'<b>Think harder.</b> On Monday and Tuesday together, how many buses were seen?',visual:pc(),opts:[12,16,18,20],ans:18,keep:true,why:'Monday = 12, Tuesday = 6 (1 bus and a half bus is 4 + 2). 12 + 6 = 18.'},
- {ar:'عدّي الكور كلها: كام كورة صفرا من الإجمالي؟ بعدين قرري. (Impossible = مستحيل · Unlikely = مش متوقّع · Even chance = فرصة متساوية · Likely = متوقّع · Certain = أكيد)',prompt:'A bag has 1 red, 1 blue and 8 yellow marbles. You pick one without looking. <b>How likely is a yellow marble?</b>',visual:bag({red:1,blue:1,yellow:8}),opts:CH,keep:true,ans:'Likely',why:'8 out of 10 marbles are yellow, so yellow is likely.'},
- {ar:'سارا بتقول: مستحيل تسحب كورة خضرا، وأكيد تسحب كورة حمرا أو زرقا. اسألي نفسك عن كل شنطة: هل فيها كور خضرا؟ وهل كل الكور حمرا أو زرقا؟',prompt:'<b>Hard.</b> Sara says: "I have a bag of marbles. It is <i>impossible</i> to pick a green marble, and it is <i>certain</i> that I pick red or blue." Which bag could be hers?',visual:null,opts:['3 red, 3 blue, 1 green','4 red, 6 blue','5 red, 5 yellow','10 green'],ans:'4 red, 6 blue',keep:true,why:'There must be no green marbles, and every marble must be red or blue. Only 4 red and 6 blue works.'}
+ {ar:'في الجدول أرقام زوجية وفردية. يجب أن يكون الرقم «Odd» (فردي) و«Greater than 10» (أكبر من 10) معًا. عُدَّ هذه الأرقام.',prompt:'How many numbers are <b>odd and greater than 10</b>?',visual:c1(),opts:[2,3,4,5],ans:3,keep:true,why:'Odd and greater than 10 is the top left box: 13, 17 and 25. That is 3 numbers.'},
+ {ar:'«In all» = المجموع: عُدَّ كل الأرقام في الجدول كله.',prompt:'How many numbers are in the diagram <b>in all</b>?',visual:c1(),opts:[8,9,10,11],ans:10,keep:true,why:'3 + 2 + 2 + 3 = 10.'},
+ {ar:'«Fewest» = الأقل: اختر الطعام الذي له أقل عدد من العلامات.',prompt:'Which food did the <b>fewest</b> children choose?',visual:tt(),opts:['Pizza','Pasta','Rice','Soup'],ans:'Soup',keep:true,why:'Soup has the fewest marks: 4.'},
+ {ar:'«In all» = المجموع: اجمع علامات كل أنواع الطعام (كل مجموعة = 5).',prompt:'How many children were asked <b>in all</b>?',visual:tt(),opts:[29,30,31,32],ans:31,keep:true,why:'9 + 6 + 12 + 4 = 31.'},
+ {ar:'انظر إلى عمود Blue واقرأ الرقم عند أعلاه. الخطوط تزيد 5، 5.',prompt:'How many children chose <b>Blue</b>?',visual:bc(),opts:[10,12,15,20],ans:15,keep:true,why:'The Blue bar reaches 15. The scale goes up in 5s.'},
+ {ar:'«More» = بكم يزيد؟ اقرأ عمود Pink وعمود Green، ثم اطرح.',prompt:'How many <b>more</b> children chose Pink than Green?',visual:bc(),opts:[5,10,15,25],ans:15,keep:true,why:'Pink = 20, Green = 5. 20 − 5 = 15.'},
+ {ar:'كل حافلة كاملة = 4. نصف الحافلة = 2. اجمع حافلات Wednesday.',prompt:'How many buses were seen on <b>Wednesday</b>?',visual:pc(),opts:[3,12,14,16],ans:14,keep:true,why:'3 whole buses = 12, and the half bus = 2. 12 + 2 = 14.'},
+ {ar:'فكّر جيدًا. انظر كم حافلة في Monday وكم في Tuesday (فيه نصف حافلة)، ثم اجمع.',prompt:'<b>Think harder.</b> On Monday and Tuesday together, how many buses were seen?',visual:pc(),opts:[12,16,18,20],ans:18,keep:true,why:'Monday = 12, Tuesday = 6 (1 bus and a half bus is 4 + 2). 12 + 6 = 18.'},
+ {ar:'«Curved surface» = سطح منحنٍ. «Vertex» = رأس (ركن). فكّر في كل مجسم: هل له سطح منحنٍ؟ وهل له رأس؟',prompt:'Which 3D shape has a <b>curved surface</b> and <b>1 vertex</b>?',visual:null,opts:['cube','cone','cylinder','sphere'],ans:'cone',keep:true,why:'A cone has a curved surface and 1 vertex at the top. A cylinder and a sphere have no vertices. A cube has no curved surface.'},
+ {ar:'المفتاح: كل ⭐ = 10 أطفال. فكّر: 3 نجوم = 30، وبقي 5، وهو نصف ⭐.',prompt:'<b>Hard.</b> In a pictogram the key is ⭐ = 10 children. <b>35</b> children chose football. How many ⭐ should be drawn?',visual:null,opts:['3','3 and a half','4','35'],ans:'3 and a half',keep:true,why:'3 whole stars = 30. The 5 that is left is half a star (half of 10). So 3 and a half stars.'}
 );
 function start(){S.score=0;S.total=0;runMC(Q,'Unit 4 Challenge',()=>end('Unit 4 Challenge complete'));}
 
