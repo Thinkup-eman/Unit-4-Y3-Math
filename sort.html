@@ -108,9 +108,8 @@ table.carroll th{font-size:15px}
 @media (max-width:420px){table.t th,table.t td{padding:6px 4px;font-size:15px}}
 
 .fab{position:fixed;right:14px;bottom:16px;z-index:30;display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;text-decoration:none;font-family:var(--disp);font-weight:800;font-size:19px;border:4px solid var(--navy);border-radius:22px;padding:8px 18px;box-shadow:0 5px 0 var(--navy)}
-body{padding-bottom:96px}
+body{padding-bottom:130px}
 
-body::after{content:"";position:fixed;inset:0;background:var(--brain) center 55%/70% no-repeat;opacity:.06;mix-blend-mode:multiply;pointer-events:none;z-index:6}
 
 .mcard{display:block;text-decoration:none;color:var(--navy);border:4px solid var(--navy);border-radius:26px;padding:16px 20px;margin-bottom:20px;box-shadow:0 6px 0 var(--navy);position:relative}
 .mcard .n{position:absolute;left:-6px;top:-10px;width:40px;height:40px;border-radius:50%;background:#fff;border:4px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px}
@@ -142,16 +141,17 @@ const GAMES=[['sort','Sort It!',76],['tally','Tally Time',13],['charts','Chart M
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{name:'',games:{}};}catch(e){return{name:'',games:{}};}}
 function store(d){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
 function stars(sc,t){const p=t?sc/t:0;return p>=.9?'★★★':p>=.65?'★★☆':'★☆☆';}
-function lines(d){const nm=(d.name||'').trim()||'Student';const out=['ThinkUp Year 3 · Unit 4 (Statistical methods and chance)','Name: '+nm];let sc=0,tt=0;
-  GAMES.forEach(([k,t,tot],i)=>{const g=d.games[k];tt+=tot;if(g)sc+=g.score;out.push((i+1)+'. '+t+': '+(g?(g.done?g.score+' / '+tot+'  '+stars(g.score,tot):'not finished ('+g.score+' / '+tot+' so far)'):'not played'));});out.push('Total: '+sc+' / '+tt);return out;}
+const HEAD='ThinkUp Year 3 · Unit 4 Statistical methods';
+function gl(d,k){const i=GAMES.findIndex(x=>x[0]===k);const [,t,tot]=GAMES[i];const g=d.games[k];return 'Mission '+(i+1)+' · '+t+': '+(g?(g.done?g.score+' / '+tot:'not finished ('+g.score+' / '+tot+' so far)'):'not played');}
+function lines(d){const nm=(d.name||'').trim()||'Student';const out=[HEAD,'Name: '+nm,''];let sc=0,tt=0;
+  GAMES.forEach(([k,t,tot])=>{const g=d.games[k];tt+=tot;if(g)sc+=g.score;out.push(gl(d,k));});out.push('','Total: '+sc+' / '+tt);return out;}
 function copyText(t,btn){const ok=()=>{if(btn){const o=btn.textContent;btn.textContent='Copied ✓';setTimeout(()=>btn.textContent=o,1600);}};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,()=>fb());}else fb();
   function fb(){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.append(a);a.select();try{document.execCommand('copy');}catch(e){}a.remove();ok();}}
 function waLink(t){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(t);}
-function oneLines(d,k){const nm=(d.name||'').trim()||'Student';const i=GAMES.findIndex(x=>x[0]===k);const [,t,tot]=GAMES[i];const g=d.games[k];
-  return ['ThinkUp Year 3 · Unit 4 (Statistical methods and chance)','Name: '+nm,(i+1)+'. '+t+': '+(g?(g.done?g.score+' / '+tot+'  '+stars(g.score,tot):'not finished ('+g.score+' / '+tot+' so far)'):'not played')];}
-function resultCards(){const d=load();const cur=window.GAME&&window.GAME.key;const f=$('#fab');if(f)f.href=waLink(lines(d).join('\n'));const root=$('#results');if(!root)return;if(cur&&!window.__done){root.replaceChildren();return;}
-  const mk=(title,txt,arTxt,send,cp)=>h('div',{class:'result'},h('h2',{},title),txt.map(l=>h('p',{},l)),h('div',{class:'ar',lang:'ar',dir:'rtl',html:bidi(arTxt)}),h('div',{class:'row'},h('a',{class:'btn wa',style:'text-decoration:none;display:inline-flex;align-items:center',href:waLink(txt.join('\n')),target:'_blank',rel:'noopener'},send),h('button',{class:'btn',onclick:e=>copyText(txt.join('\n'),e.target)},cp)));
+function oneLines(d,k){const nm=(d.name||'').trim()||'Student';return [HEAD,'Name: '+nm,'',gl(d,k)];}
+function resultCards(){const d=load();const cur=window.GAME&&window.GAME.key;const f=$('#fab');if(f)f.href=waLink((cur?oneLines(d,cur):lines(d)).join('\n'));const root=$('#results');if(!root)return;if(cur&&!window.__done){root.replaceChildren();return;}
+  const mk=(title,txt,arTxt,send,cp)=>h('div',{class:'result'},h('h2',{},title),txt.map(l=>l?h('p',{},l):h('br')),h('div',{class:'ar',lang:'ar',dir:'rtl',html:bidi(arTxt)}),h('div',{class:'row'},h('a',{class:'btn wa',style:'text-decoration:none;display:inline-flex;align-items:center',href:waLink(txt.join('\n')),target:'_blank',rel:'noopener'},send),h('button',{class:'btn',onclick:e=>copyText(txt.join('\n'),e.target)},cp)));
   const kids=[];
   if(cur)kids.push(mk('My result',oneLines(d,cur),'ليس لازمًا أن تلعب كل الألعاب. اضغط على الزر الأخضر لترسل نتيجة هذه اللعبة إلى مس إيمان على واتساب، أو اضغط Copy my result لنسخها.','Send this result to Miss Eman on WhatsApp','Copy my result'));
   kids.push(mk('All my Unit 4 results',lines(d),'هذا تقرير بنتيجة كل الألعاب معًا. اضغط على الزر الأخضر لترسله إلى مس إيمان، أو اضغط Copy all my results لنسخه.','Send all my results to Miss Eman on WhatsApp','Copy all my results'));
