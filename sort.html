@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sort It</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{--navy:#1c2b4a;--navy2:#2c4068;--gold:#d8a23a;--gold-soft:#fbf0d4;--teal:#1f8a86;--teal-soft:#dff0ee;--paper:#f1f4f8;--card:#ffffff;--line:#d3dbe6;--ink:#1c2b4a;--mute:#5b6b85;--good:#23804f;--good-soft:#dcf1e5;--bad:#b8432f;--bad-soft:#f9e0da;--red:#d64a3b;--blue:#2f6fcf;--yellow:#e8b81f;--green:#2f9a57;--disp:'Baloo 2','Trebuchet MS',sans-serif;--body:'Nunito','Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{height:auto}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 28px;margin:0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 14px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+.brand{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.2px}.brand b{color:var(--gold)}
+.unit{font-size:14px;opacity:.85}
+main{max-width:720px;margin:0 auto}
+h1{font-family:var(--disp);font-size:30px;line-height:1.1;margin:6px 0 4px;text-wrap:balance}
+h2{font-family:var(--disp);font-size:22px;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--mute);margin:0 0 14px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);margin-bottom:8px;gap:8px}
+.bar-prog{height:8px;background:var(--line);border-radius:6px;flex:1;overflow:hidden}.bar-prog i{display:block;height:100%;background:var(--teal);transition:width .3s}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-size:18px;min-height:48px}
+.btn:hover{background:#17706d}.btn.gold{background:var(--gold);color:var(--navy)}.btn.gold:hover{background:#c5922d}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn[disabled]{opacity:.45;cursor:default}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opts{display:grid;gap:10px;margin-top:12px}
+.opt{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;text-align:left;font-weight:700;font-size:18px;color:var(--ink);min-height:48px}
+.opt:hover:not([disabled]){border-color:var(--teal)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);text-decoration:line-through;color:var(--mute)}
+.msg{min-height:26px;margin-top:10px;font-weight:800}
+.msg.good{color:var(--good)}.msg.bad{color:var(--bad)}
+.why{background:var(--teal-soft);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;background:var(--gold-soft);color:#7a5513;border-radius:8px;padding:2px 9px;font-weight:800;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+.stars{font-size:46px;letter-spacing:6px;color:var(--gold);text-align:center;margin:8px 0}
+.end{text-align:center}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}.bar-prog i{transition:none}}
+/* chart */
+.chart{margin:8px 0 4px}
+.plot{position:relative;margin-left:34px;height:200px;border-left:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+.gl{position:absolute;left:0;right:0;border-top:1px solid var(--line)}
+.gl span{position:absolute;left:-32px;top:-10px;font-size:12px;width:26px;text-align:right;color:var(--mute)}
+.cols,.labs,.ctrl{display:grid;gap:10px;padding:0 10px}
+.cols{position:absolute;inset:0;align-items:end}
+.col{height:100%;display:flex;align-items:flex-end}
+.fill{width:100%;background:var(--teal);border-radius:5px 5px 0 0;transition:height .15s}
+.labs{margin-left:34px;margin-top:6px;text-align:center;font-weight:800;font-size:14px}
+.ctrl{margin-left:34px;margin-top:6px;text-align:center}
+.ctrl .cc{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ctrl button{width:100%;max-width:56px;height:40px;border-radius:10px;border:2px solid var(--navy);background:#fff;font-weight:800;font-size:20px;color:var(--navy)}
+.ctitle{text-align:center;font-weight:800;margin-bottom:4px}
+.axis-t{font-size:13px;color:var(--mute);text-align:center;margin-top:4px}
+table.t{border-collapse:collapse;width:100%}
+table.t th,table.t td{border:1.5px solid var(--navy);padding:8px 10px;text-align:center;font-weight:700}
+table.t th{background:var(--navy);color:#fff}
+table.t td.l{text-align:left;background:var(--paper)}
+.pic{font-size:28px;line-height:1}
+.pic.half{display:inline-block;width:.5em;overflow:hidden;vertical-align:bottom}
+.venn{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:4/3}
+.vsvg{position:absolute;inset:0;width:100%;height:100%}
+.vzone{position:absolute;cursor:pointer;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center}
+.vzone:hover{background:rgba(216,162,58,.18)}
+.vitems,.vitems{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;align-items:center;pointer-events:none}
+.placed{background:#fff;border:1.5px solid var(--navy);border-radius:8px;padding:1px 6px;font-size:13px;font-weight:800;line-height:1.3}
+table.carroll td.cz{height:96px;cursor:pointer;vertical-align:middle}
+table.carroll td.cz:hover{background:var(--gold-soft)}
+table.carroll th{font-size:15px}
+@media (max-width:420px){.placed{font-size:11px;padding:0 4px}.opt{font-size:17px}h1{font-size:26px}}
+.vsvgw{position:absolute;inset:0}
+
+.back{color:#fff;text-decoration:none;font-weight:800;font-size:15px;border:2px solid rgba(255,255,255,.55);border-radius:10px;padding:6px 12px}.back:hover{background:rgba(255,255,255,.15)}
+</style>
+</head><body><div class="top"><span class="brand">Think<b>Up</b></span><a class="back" href="index.html">← Menu</a></div>
+<main>
+<div id="intro" class="card"><h1>Sort It!</h1><p class="lead">Venn and Carroll diagrams</p><p>Play on your own or with your teacher. You get a star score at the end.</p><button class="btn" id="go">Start</button></div>
+<div id="app"></div>
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+function h(tag,a={},...kids){const e=document.createElement(tag);for(const k in a){const v=a[k];if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else if(k==='html')e.innerHTML=v;else e.setAttribute(k,v);}for(const c of kids.flat()){if(c==null||c===false)continue;e.append(c.nodeType?c:document.createTextNode(c));}return e;}
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const S={score:0,total:0};
+function show(...nodes){const m=$('#app');m.replaceChildren(...nodes);window.scrollTo(0,0);}
+function head(part,i,n,tagText){return h('div',{class:'prog'},h('span',{class:'tag'},tagText||part),h('div',{class:'bar-prog'},h('i',{style:`width:${Math.round(i/n*100)}%`})),h('span',{},i+' / '+n));}
+/* generic multiple-choice. q:{prompt,visual,opts:[..],ans:index|string,why} */
+function mc(q,idx,n,done,label){
+  const opts=q.opts.slice();const ans=q.ans;
+  const list=q.keep?opts:shuffle(opts);
+  let tried=false,solved=false;
+  const msg=h('div',{class:'msg'});const box=h('div',{class:'opts'});const why=h('div');const next=h('button',{class:'btn gold',hidden:'',onclick:()=>done()},idx===n?'Finish':'Next');
+  list.forEach(o=>{const b=h('button',{class:'opt',onclick:()=>{if(solved)return;
+    if(String(o)===String(ans)||(q.accept&&q.accept.includes(o))){solved=true;b.classList.add('right');if(!tried){S.score++;msg.textContent='Correct! Well done.';}else msg.textContent='Yes, that is it.';msg.className='msg good';[...box.children].forEach(x=>x.disabled=true);if(q.why)why.replaceChildren(h('div',{class:'why',html:q.why}));next.hidden=false;next.focus();}
+    else{tried=true;b.classList.add('wrong');b.disabled=true;msg.textContent='Not quite. Try again.';msg.className='msg bad';card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');}
+  }},String(o));box.append(b);});
+  S.total++;
+  const card=h('div',{class:'card'},h('h2',{html:q.prompt}),q.visual||null,box,msg,why,h('div',{style:'margin-top:12px'},next));
+  return h('div',{},head(label||'Question',idx,n),card);
+}
+function runMC(list,label,fin){let i=0;const go=()=>{if(i>=list.length)return fin();const q=list[i];i++;show(mc(q,i,list.length,go,label));};go();}
+function end(title,sub){const pct=S.total?S.score/S.total:1;const st=pct>=.9?3:pct>=.65?2:1;
+  show(h('div',{class:'card end'},h('h1',{},title),h('div',{class:'stars','aria-label':st+' stars'},'★'.repeat(st)+'☆'.repeat(3-st)),h('p',{style:'font-size:20px;font-weight:800'},`You got ${S.score} out of ${S.total} right the first time.`),h('p',{class:'lead'},sub||(st===3?'Brilliant work, Mathematician!':st===2?'Good job! Play again to get 3 stars.':'Keep going. Practise again and you will improve.')),h('button',{class:'btn',onclick:()=>location.reload()},'Play again')));}
+function tallySVG(n,w){const g=Math.floor(n/5),r=n%5;let x=6,s='';const L=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  for(let k=0;k<g;k++){for(let i=0;i<4;i++)s+=L(x+i*9,4,x+i*9,34);s+=L(x-4,30,x+36,8);x+=52;}
+  for(let i=0;i<r;i++){s+=L(x+i*9,4,x+i*9,34);}
+  const W=Math.max(x+r*9+4,20);return h('span',{class:'tally',html:`<svg role="img" aria-label="tally showing ${n}" width="${w||W}" height="40" viewBox="0 0 ${W} 40" style="max-width:100%" fill="none" stroke="#1c2b4a" stroke-width="3.2" stroke-linecap="round">${s}</svg>`});}
+function barChart(o){const px=200/o.max,step=o.step||1;const root=h('div',{class:'chart'});if(o.title)root.append(h('div',{class:'ctitle'},o.title));
+  const plot=h('div',{class:'plot'});for(let y=step;y<=o.max;y+=step)plot.append(h('div',{class:'gl',style:`bottom:${y*px}px`},h('span',{},y)));
+  const gc=`grid-template-columns:repeat(${o.data.length},1fr)`;const cols=h('div',{class:'cols',style:gc});const fills=o.data.map(d=>{const f=h('div',{class:'fill',style:`height:${d.v*px}px`+(d.color?`;background:${d.color}`:'')});cols.append(h('div',{class:'col'},f));return f;});plot.append(cols);root.append(plot);
+  root.append(h('div',{class:'labs',style:gc},o.data.map(d=>h('div',{},d.l))));
+  const vals=[];if(o.build){const ct=h('div',{class:'ctrl',style:gc});o.data.forEach((d,i)=>{const v=h('div',{style:'font-weight:800;font-size:18px'},d.v);vals.push(v);ct.append(h('div',{class:'cc'},h('button',{'aria-label':'add one to '+d.l,onclick:()=>{if(d.v<o.max){d.v++;upd();o.onChange&&o.onChange();}}},'+'),v,h('button',{'aria-label':'take one from '+d.l,onclick:()=>{if(d.v>0){d.v--;upd();o.onChange&&o.onChange();}}},'−')));});root.append(ct);}
+  function upd(){fills.forEach((f,i)=>f.style.height=o.data[i].v*px+'px');vals.forEach((v,i)=>v.textContent=o.data[i].v);}
+  if(o.ylabel)root.append(h('div',{class:'axis-t'},o.ylabel));return root;}
+function pictoRow(emoji,n,half){const d=h('span',{});for(let i=0;i<n;i++)d.append(h('span',{class:'pic'},emoji));if(half)d.append(h('span',{class:'pic half'},emoji));return d;}
+function pictogram(rows,emoji,key,title){const t=h('table',{class:'t'});if(title)t.append(h('caption',{style:'font-weight:800;padding-bottom:6px'},title));rows.forEach(r=>t.append(h('tr',{},h('td',{class:'l',style:'width:34%'},r.l),h('td',{style:'text-align:left'},pictoRow(emoji,Math.floor(r.v/key),(r.v/key)%1!==0)))));
+  return h('div',{},t,h('div',{class:'axis-t'},`Key: ${emoji} = ${key}`+(rows.some(r=>(r.v/key)%1!==0)?`, half a picture = ${key/2}`:'')));}
+
+const LEVELS=[
+{name:'Venn diagram: animals',type:'venn',A:'Has fur',B:'Can fly',items:[['🐯 tiger',1,0],['🐑 sheep',1,0],['🐶 dog',1,0],['🦅 eagle',0,1],['🦋 butterfly',0,1],['🦇 bat',1,1],['🐍 snake',0,0],['🐟 fish',0,0],['🐸 frog',0,0]],tip:'The bat has fur and it can fly, so it goes in the middle. Things with neither label go outside the circles.'},
+{name:'Carroll diagram: animals',type:'carroll',cols:['Can fly','Cannot fly'],rows:['Lives in the wild','Does not live in the wild'],items:[['🦅 eagle',0,0],['🦋 butterfly',0,0],['🦜 budgie',0,1],['🐯 tiger',1,0],['🐍 snake',1,0],['🐒 monkey',1,0],['🐑 sheep',1,1],['🐐 goat',1,1]],tip:'Read the column heading and the row heading together. An animal goes in a box only if both are true.'},
+{name:'Carroll diagram: numbers',type:'carroll',cols:['Greater than 10','Not greater than 10'],rows:['Odd','Even'],items:[['13',0,0],['17',0,0],['5',1,0],['9',1,0],['12',0,1],['20',0,1],['4',1,1],['8',1,1]],tip:'Check two things for each number: odd or even, and greater than 10 or not.'},
+{name:'Venn diagram: numbers',type:'venn',A:'Even',B:'Greater than 10',items:[['12',1,1],['20',1,1],['4',1,0],['8',1,0],['13',0,1],['17',0,1],['3',0,0],['9',0,0]],tip:'12 is even and greater than 10, so it goes in the middle. 3 is odd and not greater than 10, so it goes outside.'},
+{name:'Venn diagram: shapes',type:'venn',A:'Has 4 sides',B:'Has a right angle',items:[['square',1,1],['rectangle',1,1],['parallelogram',1,0],['rhombus',1,0],['right triangle',0,1],['hexagon',0,0]],tip:'A square has 4 sides and right angles, so it is in the middle. A hexagon has neither.'}
+];
+let li=0;
+function level(){
+  const L=LEVELS[li];
+  const items=shuffle(L.items.map((x,i)=>({t:x[0],a:x[1],b:x[2],i,done:false})));
+  let sel=null,left=items.length,wrongOnce=new Set();
+  const msg=h('div',{class:'msg'});
+  const tray=h('div',{class:'row',style:'gap:8px;margin:6px 0 12px'});
+  const chips=items.map(it=>{const b=h('button',{class:'opt',style:'padding:8px 12px;font-size:17px;min-height:44px',onclick:()=>{if(it.done)return;sel=it;chips.forEach(c=>c.style.outline='');b.style.outline='3px solid var(--gold)';msg.textContent='Now tap the place where it belongs.';msg.className='msg';}},it.t);tray.append(b);return b;});
+  function key(it){return L.type==='venn'?(it.a&&it.b?'AB':it.a?'A':it.b?'B':'N'):('c'+it.a+'r'+it.b);}
+  const zones={};
+  function drop(k,zone){
+    if(!sel){msg.textContent='Tap one of the items first.';msg.className='msg bad';return;}
+    const it=sel;const ok=key(it)===k;
+    if(ok){it.done=true;S.score+=wrongOnce.has(it.i)?0:1;chips[items.indexOf(it)].remove();zones[k].append(h('span',{class:'placed'},it.t));sel=null;left--;msg.textContent=wrongOnce.has(it.i)?'Yes! That is the right place.':'Correct!';msg.className='msg good';
+      if(!left){fin.hidden=false;tipBox.hidden=false;fin.focus();}
+    }else{wrongOnce.add(it.i);msg.textContent=L.type==='venn'?'Not there. Check BOTH labels, then try again.':'Not there. Read the column AND the row heading.';msg.className='msg bad';zone.classList.remove('shake');void zone.offsetWidth;zone.classList.add('shake');}
+  }
+  let diagram;
+  if(L.type==='venn'){
+    const mk=(k,css,label)=>{const z=h('div',{class:'vzone',style:css,onclick:()=>drop(k,z),role:'button',tabindex:'0','aria-label':label,onkeydown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();drop(k,z);}}});zones[k]=h('div',{class:'vitems'});z.append(zones[k]);return z;};
+    diagram=h('div',{class:'venn'},
+      h('div',{class:'vsvgw',html:`<svg viewBox="0 0 400 300" class="vsvg" aria-hidden="true"><rect x="2" y="2" width="396" height="296" rx="10" fill="#fff" stroke="#1c2b4a" stroke-width="3"/><circle cx="150" cy="130" r="100" fill="#dff0ee" fill-opacity=".85" stroke="#1f8a86" stroke-width="3"/><circle cx="250" cy="130" r="100" fill="#fbf0d4" fill-opacity=".85" stroke="#d8a23a" stroke-width="3"/><clipPath id="cA"><circle cx="150" cy="130" r="100"/></clipPath><circle cx="250" cy="130" r="100" fill="#cfe3d4" clip-path="url(#cA)"/><text x="100" y="30" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#17706d">${L.A}</text><text x="300" y="30" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#7a5513">${L.B}</text></svg>`}),
+      mk('A','left:12%;top:24%;width:24%;height:50%','only '+L.A),mk('AB','left:39%;top:24%;width:22%;height:50%','both'),mk('B','left:64%;top:24%;width:24%;height:50%','only '+L.B),mk('N','left:3%;top:84%;width:94%;height:14%','neither'));
+  }else{
+    const t=h('table',{class:'t carroll'});t.append(h('tr',{},h('th',{}),h('th',{},L.cols[0]),h('th',{},L.cols[1])));
+    L.rows.forEach((r,ri)=>{const tr=h('tr',{},h('td',{class:'l'},r));[0,1].forEach(ci=>{const k='c'+ci+'r'+ri;const td=h('td',{class:'cz',tabindex:'0',role:'button','aria-label':L.cols[ci]+' and '+r,onclick:()=>drop(k,td),onkeydown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();drop(k,td);}}});zones[k]=h('div',{class:'vitems'});td.append(zones[k]);tr.append(td);});t.append(tr);});diagram=t;
+  }
+  const tipBox=h('div',{class:'why',hidden:''},L.tip);
+  const fin=h('button',{class:'btn gold',hidden:'',onclick:()=>{li++;if(li>=LEVELS.length)end('Sort It! complete');else level();}},li===LEVELS.length-1?'Finish':'Next level');
+  show(head('Level '+(li+1),li,LEVELS.length,'Level '+(li+1)),h('div',{class:'card'},h('h2',{},L.name),h('p',{class:'lead',style:'margin-bottom:6px'},'Tap an item, then tap the place on the diagram where it belongs.'),tray,diagram,msg,tipBox,h('div',{style:'margin-top:12px'},fin)));
+}
+function start(){S.total=0;S.score=0;LEVELS.forEach(l=>S.total+=l.items.length);
+  level();}
+
+
+document.getElementById('go').addEventListener('click',function(){document.getElementById('intro').hidden=true;start();});
+</script>
+
+</body></html>

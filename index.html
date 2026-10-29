@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unit 4 Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{--navy:#1c2b4a;--navy2:#2c4068;--gold:#d8a23a;--gold-soft:#fbf0d4;--teal:#1f8a86;--teal-soft:#dff0ee;--paper:#f1f4f8;--card:#ffffff;--line:#d3dbe6;--ink:#1c2b4a;--mute:#5b6b85;--good:#23804f;--good-soft:#dcf1e5;--bad:#b8432f;--bad-soft:#f9e0da;--red:#d64a3b;--blue:#2f6fcf;--yellow:#e8b81f;--green:#2f9a57;--disp:'Baloo 2','Trebuchet MS',sans-serif;--body:'Nunito','Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{height:auto}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 28px;margin:0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 14px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+.brand{font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:.2px}.brand b{color:var(--gold)}
+.unit{font-size:14px;opacity:.85}
+main{max-width:720px;margin:0 auto}
+h1{font-family:var(--disp);font-size:30px;line-height:1.1;margin:6px 0 4px;text-wrap:balance}
+h2{font-family:var(--disp);font-size:22px;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--mute);margin:0 0 14px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);margin-bottom:8px;gap:8px}
+.bar-prog{height:8px;background:var(--line);border-radius:6px;flex:1;overflow:hidden}.bar-prog i{display:block;height:100%;background:var(--teal);transition:width .3s}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-size:18px;min-height:48px}
+.btn:hover{background:#17706d}.btn.gold{background:var(--gold);color:var(--navy)}.btn.gold:hover{background:#c5922d}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn[disabled]{opacity:.45;cursor:default}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opts{display:grid;gap:10px;margin-top:12px}
+.opt{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;text-align:left;font-weight:700;font-size:18px;color:var(--ink);min-height:48px}
+.opt:hover:not([disabled]){border-color:var(--teal)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);text-decoration:line-through;color:var(--mute)}
+.msg{min-height:26px;margin-top:10px;font-weight:800}
+.msg.good{color:var(--good)}.msg.bad{color:var(--bad)}
+.why{background:var(--teal-soft);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;background:var(--gold-soft);color:#7a5513;border-radius:8px;padding:2px 9px;font-weight:800;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+.stars{font-size:46px;letter-spacing:6px;color:var(--gold);text-align:center;margin:8px 0}
+.end{text-align:center}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}.bar-prog i{transition:none}}
+/* chart */
+.chart{margin:8px 0 4px}
+.plot{position:relative;margin-left:34px;height:200px;border-left:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+.gl{position:absolute;left:0;right:0;border-top:1px solid var(--line)}
+.gl span{position:absolute;left:-32px;top:-10px;font-size:12px;width:26px;text-align:right;color:var(--mute)}
+.cols,.labs,.ctrl{display:grid;gap:10px;padding:0 10px}
+.cols{position:absolute;inset:0;align-items:end}
+.col{height:100%;display:flex;align-items:flex-end}
+.fill{width:100%;background:var(--teal);border-radius:5px 5px 0 0;transition:height .15s}
+.labs{margin-left:34px;margin-top:6px;text-align:center;font-weight:800;font-size:14px}
+.ctrl{margin-left:34px;margin-top:6px;text-align:center}
+.ctrl .cc{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ctrl button{width:100%;max-width:56px;height:40px;border-radius:10px;border:2px solid var(--navy);background:#fff;font-weight:800;font-size:20px;color:var(--navy)}
+.ctitle{text-align:center;font-weight:800;margin-bottom:4px}
+.axis-t{font-size:13px;color:var(--mute);text-align:center;margin-top:4px}
+table.t{border-collapse:collapse;width:100%}
+table.t th,table.t td{border:1.5px solid var(--navy);padding:8px 10px;text-align:center;font-weight:700}
+table.t th{background:var(--navy);color:#fff}
+table.t td.l{text-align:left;background:var(--paper)}
+.pic{font-size:28px;line-height:1}
+.pic.half{display:inline-block;width:.5em;overflow:hidden;vertical-align:bottom}
+.venn{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:4/3}
+.vsvg{position:absolute;inset:0;width:100%;height:100%}
+.vzone{position:absolute;cursor:pointer;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center}
+.vzone:hover{background:rgba(216,162,58,.18)}
+.vitems,.vitems{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;align-items:center;pointer-events:none}
+.placed{background:#fff;border:1.5px solid var(--navy);border-radius:8px;padding:1px 6px;font-size:13px;font-weight:800;line-height:1.3}
+table.carroll td.cz{height:96px;cursor:pointer;vertical-align:middle}
+table.carroll td.cz:hover{background:var(--gold-soft)}
+table.carroll th{font-size:15px}
+@media (max-width:420px){.placed{font-size:11px;padding:0 4px}.opt{font-size:17px}h1{font-size:26px}}
+.vsvgw{position:absolute;inset:0}
+
+.missions{display:grid;gap:12px;margin-top:6px}
+.mission{display:flex;align-items:center;gap:14px;background:#fff;border:2.5px solid var(--teal);border-radius:14px;padding:14px;text-decoration:none;color:var(--ink)}
+.mission.last{border-color:var(--gold)}
+.mission:hover{background:var(--teal-soft)}.mission.last:hover{background:var(--gold-soft)}
+.num{flex:none;width:46px;height:46px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--disp);font-weight:700;font-size:26px;display:flex;align-items:center;justify-content:center}
+.last .num{background:var(--gold);color:var(--navy)}
+.mt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.mt b{font-family:var(--disp);font-size:21px;line-height:1.15}
+.mt i{font-style:normal;font-weight:800;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--teal)}
+.last .mt i{color:#8a6414}
+.mt span{color:var(--mute);font-size:15px}
+.go{flex:none;background:var(--teal);color:#fff;border-radius:10px;padding:8px 16px;font-weight:800}
+.last .go{background:var(--gold);color:var(--navy)}
+</style></head><body>
+<div class="top"><span class="brand">Think<b>Up</b></span><span class="unit">Year 3 · Unit 4 · Statistical methods and chance</span></div>
+<main>
+<h1>Unit 4 Mission Map</h1>
+<p class="lead">Do the missions in order. You can play each one again.</p>
+<div class="missions"><a class="mission" href="sort.html"><span class="num">1</span><span class="mt"><b>Sort It!</b><i>Venn and Carroll diagrams</i><span>Tap an item, then tap where it belongs.</span></span><span class="go">Play</span></a><a class="mission" href="tally.html"><span class="num">2</span><span class="mt"><b>Tally Time</b><i>Tally charts</i><span>Make a tally, read a tally, use a tally chart.</span></span><span class="go">Play</span></a><a class="mission" href="charts.html"><span class="num">3</span><span class="mt"><b>Chart Maker</b><i>Pictograms and bar charts</i><span>Build and read charts, then find the mistake.</span></span><span class="go">Play</span></a><a class="mission" href="chance.html"><span class="num">4</span><span class="mt"><b>Chance Spinner</b><i>Certain, likely, unlikely, impossible</i><span>Decide how likely, then spin 20 times.</span></span><span class="go">Play</span></a><a class="mission last" href="quiz.html"><span class="num">5</span><span class="mt"><b>Unit 4 Challenge</b><i>Final test</i><span>10 mixed questions. Can you get 3 stars?</span></span><span class="go">Play</span></a></div>
+</main></body></html>
